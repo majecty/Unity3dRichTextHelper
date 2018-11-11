@@ -1,0 +1,14 @@
+{
+    "name": "Tests",
+    "references": [
+        "RichTextHelperAssembly"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

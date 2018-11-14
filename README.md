@@ -16,6 +16,16 @@ When you want to make a dialogue system, displaying richtext may cause a trouble
 
 This library helps you get substring of richtext easily.
 
+## How to Install
+
+Get unity package from below link
+
+https://github.com/majecty/Unity3dRichTextHelper/releases
+
+Or just copy and paste this file
+
+https://github.com/majecty/Unity3dRichTextHelper/blob/master/Assets/RichTextHelper/RichTextHelper.cs
+
 ## More example
 ```csharp
 using System.Collections;

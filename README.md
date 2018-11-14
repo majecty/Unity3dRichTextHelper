@@ -12,7 +12,8 @@ richText.RichTextSubString(6); // <color=blue>blue</color>bl
 ```
 
 When you want to make a dialogue system, displaying richtext may cause a trouble.
-<image here>
+![CommonError](http://g.recordit.co/2sqiTVG655.gif)
+
 This library helps you get substring of richtext easily.
 
 ## More example

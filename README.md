@@ -1,5 +1,5 @@
 # Unity3dRichTextHelper
-This library helps you get substring of unity3d's rich  text.
+This library helps you get substring of unity3d's rich  text. You can use this to implement a dialogue system
 
 ## How to use(simple)
 ```csharp

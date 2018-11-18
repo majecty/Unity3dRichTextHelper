@@ -40,8 +40,10 @@ namespace RichTextSubstringHelper
             var length = 0;
             while (m.IsConsumable())
             {
-                m.Consume();
-                length += 1;
+                if (m.Consume())
+                {
+                    length += 1;
+                }
             }
             return length;
         }
@@ -97,7 +99,9 @@ namespace RichTextSubstringHelper
             return consumedLength < originalText.Length;
         }
 
-        public void Consume()
+        // Return if real character is consumed
+        // If line's last part is closing tag, this function return false when consumed last closing tag.
+        public bool Consume()
         {
             Debug.Assert(IsConsumable());
             var peekedOriginChar = PeekNextOriginChar();
@@ -111,11 +115,20 @@ namespace RichTextSubstringHelper
                 {
                     ConsumeStartTag();
                 }
-                Consume();
+                if (IsConsumable())
+                {
+                    Consume();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
                 ConsumeRawChar();
+                return true;
             }
         }
 

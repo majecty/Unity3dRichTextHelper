@@ -67,13 +67,13 @@ public class NewBehaviourScript : MonoBehaviour {
     IEnumerator Start ()
     {
         var richText = "<color=blue>blue</color>black";
-        yield return null;
         var maker = new RichTextSubStringMaker(richText);
         
         while (maker.IsConsumable())
         {
             maker.Consume();
             uiText.text = maker.GetRichText();
+            yield return new WaitForSeconds(0.5f);
         }
     }
 }

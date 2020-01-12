@@ -108,20 +108,18 @@ namespace RichTextSubstringHelper
         {
             Debug.Assert(IsConsumable());
             var peekedOriginChar = PeekNextOriginChar();
-            if (peekedOriginChar == '<')
+            // Only consume the start tag if a tag closing bracket (>) was found.
+            var isStartTag = peekedOriginChar == '<' && IsNextTagBracketClosing(consumedLength + 1);
+            var isEndTag = peekedOriginChar == '<' && PeekNextNextOriginChar() == '/';
+            if (isStartTag || isEndTag)
             {
-                if (PeekNextNextOriginChar() == '/')
+                if (isEndTag)
                 {
                     ConsumeEndTag();
                 }
-                else if (IsNextTagBracketClosing(consumedLength + 1))   //Only consume the start tag if a tag closing bracket (>) was found.
+                else if (isStartTag)
                 {
                     ConsumeStartTag();
-                }
-                else
-                {
-                    ConsumeRawChar();
-                    return true;
                 }
 
                 if (IsConsumable())
@@ -154,7 +152,7 @@ namespace RichTextSubstringHelper
             return originalText[consumedLength];
         }
 
-        //Returns if the first tag bracket found in the string is '>', as opposed to '<'
+        // Returns if the first tag bracket found in the string is '>', as opposed to '<'
         private bool IsNextTagBracketClosing(int charIndexToStartSearch = 0)
         {
             int bracketIndex = originalText.IndexOfAny(tagBrackets, charIndexToStartSearch);

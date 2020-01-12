@@ -17,6 +17,7 @@
 //  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 //  DEALINGS IN THE SOFTWARE.
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -68,6 +69,8 @@ namespace RichTextSubstringHelper
         private Stack<RichTextTag> tagStack;
         private int consumedLength;
 
+        private static readonly char[] tagBrackets = new char[2] { '<', '>' };
+
         public RichTextSubStringMaker(string original)
         {
             this.originalText = original;
@@ -111,10 +114,16 @@ namespace RichTextSubstringHelper
                 {
                     ConsumeEndTag();
                 }
-                else
+                else if (IsNextTagBracketClosing(consumedLength + 1))   //Only consume the start tag if a tag closing bracket (>) was found.
                 {
                     ConsumeStartTag();
                 }
+                else
+                {
+                    ConsumeRawChar();
+                    return true;
+                }
+
                 if (IsConsumable())
                 {
                     return Consume();
@@ -143,6 +152,14 @@ namespace RichTextSubstringHelper
         private char PeekNextOriginChar()
         {
             return originalText[consumedLength];
+        }
+
+        //Returns if the first tag bracket found in the string is '>', as opposed to '<'
+        private bool IsNextTagBracketClosing(int charIndexToStartSearch = 0)
+        {
+            int bracketIndex = originalText.IndexOfAny(tagBrackets, charIndexToStartSearch);
+
+            return bracketIndex != -1 && originalText[bracketIndex] == '>';
         }
 
         private void ConsumeStartTag()

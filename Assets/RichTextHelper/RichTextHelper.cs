@@ -117,8 +117,7 @@ namespace RichTextSubstringHelper
                 }
                 if (IsConsumable())
                 {
-                    Consume();
-                    return true;
+                    return Consume();
                 }
                 else
                 {

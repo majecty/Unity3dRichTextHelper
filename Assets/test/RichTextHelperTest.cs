@@ -32,6 +32,7 @@ public class RichTextHelperTest
 
         var sampleText = "UnityTest behaves ";
         Assert.AreEqual(sampleText.RichTextSubString(sampleText.Length), sampleText);
+        Assert.AreEqual(sampleText.RichTextLength(), sampleText.Length);
     }
 
     [Test]
@@ -40,6 +41,7 @@ public class RichTextHelperTest
         var sampleTagText = "<color=#000>blah</color>x";
         Assert.AreEqual(sampleTagText.RichTextSubString(5), sampleTagText);
         Assert.AreEqual(sampleTagText.RichTextSubString(1), "<color=#000>b</color>");
+        Assert.AreEqual(sampleTagText.RichTextLength(), 5);
     }
 
     [Test]
@@ -51,6 +53,7 @@ public class RichTextHelperTest
         Assert.AreEqual(sampleTagText.RichTextSubString(2), "<color=#000>a<i>b</i></color>");
         Assert.AreEqual(sampleTagText.RichTextSubString(3), "<color=#000>a<i>b<b>c</b></i></color>");
         Assert.AreEqual(sampleTagText.RichTextSubString(4), "<color=#000>a<i>b<b>c</b>d</i></color>");
+        Assert.AreEqual(sampleTagText.RichTextLength(), 5);
     }
 
     [Test]
@@ -62,5 +65,6 @@ public class RichTextHelperTest
         Assert.AreEqual(sampleTagText.RichTextSubString(2), "<color=#000>a<i>b</i></color>");
         Assert.AreEqual(sampleTagText.RichTextSubString(3), "<color=#000>a<i>b<b>c</b></i></color>");
         Assert.AreEqual(sampleTagText.RichTextSubString(4), "<color=#000>a<i>b<b>c</b>d</i></color>");
+        Assert.AreEqual(sampleTagText.RichTextLength(), 4);
     }
 }
